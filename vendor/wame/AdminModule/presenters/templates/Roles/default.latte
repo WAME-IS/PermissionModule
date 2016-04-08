@@ -1,0 +1,41 @@
+{block content}
+	<h1>{$siteTitle}</h1>
+	
+	<a n:if="count($roleEntity) > 0" class="btn btn-success ajax-modal pull-right" n:href=":Admin:Role:, 'id' => null">
+		<span class="fa fa-plus"></span>
+		{_'Add role'}
+	</a>
+
+	{if count($roleEntity) == 0}
+		<div class="lead text-muted">{_'You do not have define any roles.'}</div>
+		<a class="btn btn-success" n:href=":Admin:Role:, 'id' => null">{_'Create first role'}</a>
+	{else}
+		<table class="table">
+			<thead>
+				<tr>
+					<th>{_'Name'}</th>
+					<th>{_'Inherit by'}</th>
+					<th></th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr n:foreach="$roleEntity as $role">
+					<td>
+						<a n:href=":Admin:Role:, 'id' => $role->id">{$role->name}</a>
+					</td>
+					<td>
+						{if $role->inherit}
+							{$role->inherit->name}
+						{else}
+							-
+						{/if}
+					</td>
+					<td class="text-right">
+						<a class="btn btn-sm btn-warning" n:href=":Admin:Role:, 'id' => $role->id"><span class="fa fa-edit"></span></a>
+						<a class="btn btn-sm btn-danger ajax-modal" n:href=":Admin:Role:delete, 'id' => $role->id"><span class="fa fa-trash-o"></span></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	{/if}

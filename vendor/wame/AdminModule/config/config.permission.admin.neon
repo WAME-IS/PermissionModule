@@ -1,0 +1,2 @@
+services:
+	- Wame\PermissionModule\Vendor\Wame\AdminModule\Forms\RoleForm

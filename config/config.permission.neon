@@ -1,0 +1,19 @@
+services:
+	permission.module: Wame\PermissionModule
+
+	- Wame\PermissionModule\Models\PermissionObject
+	- Wame\PermissionModule\Models\PermissionLoader
+
+	# Entities
+	- Wame\PermissionModule\Entities\PermissionEntity
+	- Wame\PermissionModule\Entities\RoleEntity
+
+	# Repositories
+	- Wame\PermissionModule\Repositories\PermissionRepository
+	- Wame\PermissionModule\Repositories\RoleRepository
+
+
+doctrine:
+	metadata:
+		Wame\PermissionModule\Entities: %appDir%/../vendor/wame/PermissionModule/entities
+		Wame\PermissionModule\Repositories: %appDir%/../vendor/wame/PermissionModule/repositories
