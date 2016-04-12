@@ -41,7 +41,6 @@ class PermissionModule extends Plugin
 		});
 		
 		$this->permission->addResource('permission');
-		
 		$this->permission->addResourceAction('permission', 'view');
 		$this->permission->allow('admin', 'permission', 'view');
 		$this->permission->addResourceAction('permission', 'add');
@@ -50,6 +49,16 @@ class PermissionModule extends Plugin
 		$this->permission->allow('admin', 'permission', 'edit');
 		$this->permission->addResourceAction('permission', 'delete');
 		$this->permission->allow('admin', 'permission', 'delete');
+		
+		$this->permission->addResource('role');
+		$this->permission->addResourceAction('role', 'view');
+		$this->permission->allow('admin', 'role', 'view');
+		$this->permission->addResourceAction('role', 'add');
+		$this->permission->allow('admin', 'role', 'add');
+		$this->permission->addResourceAction('role', 'edit');
+		$this->permission->allow('admin', 'role', 'edit');
+		$this->permission->addResourceAction('role', 'delete');
+		$this->permission->allow('admin', 'role', 'delete');
 	}
 	
 	public function afterStartPlugins() 
