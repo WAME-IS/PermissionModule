@@ -1,7 +1,17 @@
 services:
-	permission.module: Wame\PermissionModule
+	PermissionObject:
+		class: Wame\PermissionModule\Models\PermissionObject
+		setup:
+			- addResource('role')
+			- addResourceAction('role', 'view')
+			- allow('admin', 'role', 'view')
+			- addResourceAction('role', 'add')
+			- allow('admin', 'role', 'add')
+			- addResourceAction('role', 'edit')
+			- allow('admin', 'role', 'edit')
+			- addResourceAction('role', 'delete')
+			- allow('admin', 'role', 'delete')
 
-	- Wame\PermissionModule\Models\PermissionObject
 	- Wame\PermissionModule\Models\PermissionLoader
 
 	# Entities

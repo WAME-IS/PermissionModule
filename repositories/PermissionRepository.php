@@ -4,8 +4,6 @@ namespace Wame\PermissionModule\Repositories;
 
 class PermissionRepository extends \Wame\Core\Repositories\BaseRepository
 {
-	const TABLE_NAME = 'permission';
-	
 	const STATUS_DISABLED = 0;
 	const STATUS_ENABLED = 1;
 	
@@ -13,10 +11,6 @@ class PermissionRepository extends \Wame\Core\Repositories\BaseRepository
 	const TAG_DENY = 'd';
 	const TAG_NONE = 'n';
 	const TAG_OWN = 'o';
-	
-	public function __construct(\Nette\DI\Container $container, \Kdyby\Doctrine\EntityManager $entityManager) {
-		parent::__construct($container, $entityManager, self::TABLE_NAME);
-	}
 	
 	public function getAllowedTags()
 	{

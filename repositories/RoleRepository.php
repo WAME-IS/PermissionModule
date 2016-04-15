@@ -14,8 +14,8 @@ class RoleRepository extends \Wame\Core\Repositories\BaseRepository
 	/** @var RoleEntity */
 	private $roleEntity;
 	
-	public function __construct(\Nette\DI\Container $container, \Kdyby\Doctrine\EntityManager $entityManager) {
-		parent::__construct($container, $entityManager, self::TABLE_NAME);
+	public function __construct(\Nette\DI\Container $container, \Kdyby\Doctrine\EntityManager $entityManager, \h4kuna\Gettext\GettextSetup $translator, \Nette\Security\User $user) {
+		parent::__construct($container, $entityManager, $translator, $user);
 		
 		$this->roleEntity = $this->entityManager->getRepository(RoleEntity::class);
 	}
