@@ -5,7 +5,7 @@ namespace Wame\PermissionModule\Entities;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="wame_permission", indexes={@ORM\Index(name="role_id", columns={"role_id"})})
+ * @ORM\Table(name="wame_permission")
  * @ORM\Entity
  */
 class PermissionEntity extends \Wame\Core\Entities\BaseEntity 
