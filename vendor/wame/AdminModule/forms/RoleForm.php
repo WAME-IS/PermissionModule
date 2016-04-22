@@ -2,17 +2,13 @@
 
 namespace Wame\PermissionModule\Vendor\Wame\AdminModule\Forms;
 
-use Nette\Object;
 use Kdyby\Doctrine\EntityManager;
 use Wame\Core\Forms\FormFactory;
 use Wame\PermissionModule\Entities\RoleEntity;
 use Wame\PermissionModule\Repositories\RoleRepository;
 
-class RoleForm extends Object
+class RoleForm extends FormFactory
 {	
-	/** @var FormFactory */
-	private $formFactory;
-
 	/** @var RoleEntity */
 	private $roleEntity;
 	
@@ -20,18 +16,15 @@ class RoleForm extends Object
 	private $roleList;
 	
 	public function __construct(
-		EntityManager $entityManager,
-		FormFactory $formFactory
+		EntityManager $entityManager
 	) {
-		$this->formFactory = $formFactory;
-		
 		$this->roleEntity = $entityManager->getRepository(RoleEntity::class);
 		$this->roleList = $this->roleEntity->findPairs(['status' => RoleRepository::STATUS_ACTIVE], 'name');
 	}
 
 	public function create()
 	{
-		$form = $this->formFactory->createForm();
+		$form = $this->createForm();
 		
 		$form->addText('name', _('Name'))
 				->setRequired(_('Please enter role name'));
