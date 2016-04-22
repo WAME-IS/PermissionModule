@@ -15,7 +15,7 @@ class RolesPresenter extends BasePresenter
 		parent::startup();
 		
 		if (!$this->user->isAllowed('role', 'view')) {
-			$this->flashMessage(_('To enter this section you have sufficient privileges.'), 'danger');
+			$this->flashMessage(_('To enter this section you have not sufficient privileges.'), 'danger');
 			$this->redirect('parent');
 		}
 		
