@@ -6,8 +6,6 @@ use Wame\PermissionModule\Entities\RoleEntity;
 
 class RoleRepository extends \Wame\Core\Repositories\BaseRepository
 {
-	const TABLE_NAME = 'role';
-	
 	const STATUS_BLOCKED = 0;
 	const STATUS_ACTIVE = 1;
 	
@@ -37,6 +35,59 @@ class RoleRepository extends \Wame\Core\Repositories\BaseRepository
 		
 		$role->name = $values['name'];
 		$role->inherit = $this->roleEntity->findOneBy(['id' => $values['inherit']]);
+	}
+	
+	/**
+	 * Get roles by criteria
+	 * 
+	 * @param array $criteria
+	 * @param string $orderBy
+	 * @param int $limit
+	 * @param int $offset
+	 * @return RoleEntity
+	 */
+	public function getAll($criteria = [], $orderBy = null, $limit = null, $offset = null)
+	{
+		return $this->roleEntity->findBy($criteria, $orderBy, $limit, $offset);
+	}
+	
+	
+	/**
+	 * Get one role by criteria
+	 * 
+	 * @param array $criteria
+	 * @param string $orderBy
+	 * @return RoleEntity
+	 */
+	public function get($criteria = [], $orderBy = null)
+	{
+		return $this->roleEntity->findOneBy($criteria, $orderBy);
+	}
+	
+	
+	/**
+	 * Get pairs
+	 * 
+	 * @param array $criteria
+	 * @param string $value
+	 * @param array $orderBy
+	 * @param string $key
+	 * @return RoleEntity
+	 */
+	public function getPairs($criteria = [], $value = null, $orderBy = [], $key = null)
+	{
+		return $this->roleEntity->findPairs($criteria, $value, $orderBy, $key);
+	}
+	
+	/**
+	 * Return roles id => name
+	 * 
+	 * @param array $criteria
+	 * @return array
+	 */
+	public function getRoles($criteria = ['status' => self::STATUS_ACTIVE])
+	{
+		return $this->getPairs($criteria, 'name');
 	}
 	
 }
