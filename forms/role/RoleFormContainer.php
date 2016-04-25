@@ -9,13 +9,12 @@ class RoleFormContainer extends BaseFormContainer
 {
 	/** @var array */
 	private $roleList;
-	
-	/** @var RoleRepository @inject */
-	public $roleRepository;
-	
-	public function injectServices(RoleRepository $roleRepository)
+
+	public function __construct(RoleRepository $roleRepository) 
 	{
-		$this->roleRepository = $roleRepository;
+		parent::__construct();
+		
+		$this->roleList = $roleRepository->getRoles();
 	}
 
     public function render() 

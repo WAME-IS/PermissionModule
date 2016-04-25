@@ -25,10 +25,14 @@ services:
 	- Wame\PermissionModule\Repositories\RoleRepository
 
 
+	# Factories
+	- Wame\PermissionModule\Forms\IRoleFormContainerFactory
+			
+
 	# Create user form in administration
 	CreateUserForm:
 		setup:
-			- addFormContainer(Wame\PermissionModule\Forms\RoleFormContainer, 'RoleFormContainer', 80)
+			- addFormContainer(Wame\PermissionModule\Forms\RoleFormContainer(), 'RoleFormContainer', 80)
 
 
 doctrine:
