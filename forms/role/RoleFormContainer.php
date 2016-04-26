@@ -5,6 +5,12 @@ namespace Wame\PermissionModule\Forms;
 use Wame\DynamicObject\Forms\BaseFormContainer;
 use Wame\PermissionModule\Repositories\RoleRepository;
 
+interface IRoleFormContainerFactory
+{
+	/** @return RoleFormContainer */
+	function create();
+}
+
 class RoleFormContainer extends BaseFormContainer
 {
 	/** @var array */
