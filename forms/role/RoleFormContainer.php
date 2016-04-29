@@ -11,11 +11,13 @@ interface IRoleFormContainerFactory
 	function create();
 }
 
+
 class RoleFormContainer extends BaseFormContainer
 {
 	/** @var array */
 	private $roleList;
 
+	
 	public function __construct(RoleRepository $roleRepository) 
 	{
 		parent::__construct();
@@ -23,12 +25,14 @@ class RoleFormContainer extends BaseFormContainer
 		$this->roleList = $roleRepository->getRoles();
 	}
 
+	
     public function render() 
 	{
         $this->template->_form = $this->getForm();
         $this->template->render(__DIR__ . '/default.latte');
     }
 
+	
     public function configure() 
 	{
 		$form = $this->getForm();
@@ -36,5 +40,13 @@ class RoleFormContainer extends BaseFormContainer
 		$form->addSelect('role', _('Role'), $this->roleList)
 				->setPrompt(_('- Select a role -'));
     }
+	
+	
+	public function setDefaultValues($object)
+	{
+		$form = $this->getForm();
+
+		$form['role']->setDefaultValue($object->userEntity->role);
+	}
 	
 }

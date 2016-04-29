@@ -87,7 +87,7 @@ class RoleRepository extends \Wame\Core\Repositories\BaseRepository
 	 */
 	public function getRoles($criteria = ['status' => self::STATUS_ACTIVE])
 	{
-		return $this->getPairs($criteria, 'name');
+		return $this->getPairs($criteria, 'name', 'name', 'name');
 	}
 	
 }
