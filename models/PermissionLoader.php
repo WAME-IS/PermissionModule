@@ -13,6 +13,10 @@ class PermissionLoader extends Object
 	private $permission;
 
 	/** @var EntityManager */
+	/*
+	 * ! WARNING !
+	 * Chceme pouzivat pristup cez repository?
+	 */
 	private $entityManager;
 
 	public function __construct(PermissionObject $permission, EntityManager $entityManager) 
