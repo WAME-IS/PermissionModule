@@ -3,6 +3,7 @@
 namespace Wame\PermissionModule\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
+use Wame\Core\Entities\Columns;
 
 /**
  * @ORM\Table(name="wame_role")
@@ -10,7 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class RoleEntity extends \Wame\Core\Entities\BaseEntity 
 {
-    /**
+	use Columns\Status;
+
+	/**
      * @ORM\Column(name="id", type="integer", length=2, nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -24,13 +27,8 @@ class RoleEntity extends \Wame\Core\Entities\BaseEntity
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="RoleEntity")
-	 * @ORM\JoinColumn(name="inherit_id", referencedColumnName="id", nullable=false)
+	 * @ORM\JoinColumn(name="inherit_id", referencedColumnName="id", nullable=true)
 	 */
     protected $inherit;
-
-	/**
-	 * @ORM\Column(name="status", type="integer", length=1, nullable=true)
-	 */
-	protected $status;
 
 }
