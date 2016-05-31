@@ -12,16 +12,11 @@ class RoleRepository extends \Wame\Core\Repositories\BaseRepository
 	/** @var RoleEntity */
 	private $roleEntity;
 	
-	
-	public function __construct(
-		\Nette\DI\Container $container, 
-		\Kdyby\Doctrine\EntityManager $entityManager, 
-		\h4kuna\Gettext\GettextSetup $translator, 
-		\Nette\Security\User $user
-	) {
-		parent::__construct($container, $entityManager, $translator, $user, RoleEntity::class);
+	public function __construct(\Nette\DI\Container $container, \Kdyby\Doctrine\EntityManager $entityManager, \h4kuna\Gettext\GettextSetup $translator, \Nette\Security\User $user) {
+		parent::__construct($container, $entityManager, $translator, $user);
+		
+		$this->roleEntity = $this->entityManager->getRepository(RoleEntity::class);
 	}
-	
 	
 	public function addRole($values)
 	{
@@ -34,7 +29,6 @@ class RoleRepository extends \Wame\Core\Repositories\BaseRepository
 		$this->entityManager->persist($role);
 	}
 	
-	
 	public function setRole($roleId, $values)
 	{
 		$role = $this->roleEntity->findOneBy(['id' => $roleId]);
@@ -42,7 +36,6 @@ class RoleRepository extends \Wame\Core\Repositories\BaseRepository
 		$role->name = $values['name'];
 		$role->inherit = $this->roleEntity->findOneBy(['id' => $values['inherit']]);
 	}
-	
 	
 	/**
 	 * Get roles by criteria
@@ -60,6 +53,19 @@ class RoleRepository extends \Wame\Core\Repositories\BaseRepository
 	
 	
 	/**
+	 * Get one role by criteria
+	 * 
+	 * @param array $criteria
+	 * @param string $orderBy
+	 * @return RoleEntity
+	 */
+	public function get($criteria = [], $orderBy = null)
+	{
+		return $this->roleEntity->findOneBy($criteria, $orderBy);
+	}
+	
+	
+	/**
 	 * Get pairs
 	 * 
 	 * @param array $criteria
@@ -72,7 +78,6 @@ class RoleRepository extends \Wame\Core\Repositories\BaseRepository
 	{
 		return $this->roleEntity->findPairs($criteria, $value, $orderBy, $key);
 	}
-	
 	
 	/**
 	 * Return roles id => name
