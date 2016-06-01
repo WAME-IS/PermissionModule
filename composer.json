@@ -11,7 +11,8 @@
 	],
 	"require": {
 		"wame/Core": "*",
-		"wame/MenuModule": "*"
+		"wame/MenuModule": "*",
+		"wame/UserModule": "*"
 	},
 	"autoload": {
 		"classmap": ["."]
