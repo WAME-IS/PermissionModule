@@ -40,7 +40,7 @@ class RoleRepository extends \Wame\Core\Repositories\BaseRepository
 		$role = $this->roleEntity->findOneBy(['id' => $roleId]);
 		
 		$role->name = $values['name'];
-		$role->inherit = $this->roleEntity->findOneBy(['id' => $values['inherit']]);
+		$role->inherit = $this->findOneBy(['id' => $values['inherit']]);
 	}
 	
 	
@@ -55,7 +55,7 @@ class RoleRepository extends \Wame\Core\Repositories\BaseRepository
 	 */
 	public function getAll($criteria = [], $orderBy = null, $limit = null, $offset = null)
 	{
-		return $this->roleEntity->findBy($criteria, $orderBy, $limit, $offset);
+		return $this->findBy($criteria, $orderBy, $limit, $offset);
 	}
 	
 	
@@ -70,7 +70,7 @@ class RoleRepository extends \Wame\Core\Repositories\BaseRepository
 	 */
 	public function getPairs($criteria = [], $value = null, $orderBy = [], $key = null)
 	{
-		return $this->roleEntity->findPairs($criteria, $value, $orderBy, $key);
+		return $this->findPairs($criteria, $value, $orderBy, $key);
 	}
 	
 	
