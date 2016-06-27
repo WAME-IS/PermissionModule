@@ -1,7 +1,7 @@
 {block content}
 	<h1>{$siteTitle}</h1>
 	
-	<a n:if="count($roleEntity) > 0" class="btn btn-success ajax-modal pull-right" n:href=":Admin:Role:, 'id' => null">
+	<a n:if="count($roleEntity) > 0" class="btn btn-success pull-right" n:href=":Admin:Role:, 'id' => null">
 		<span class="fa fa-plus"></span>
 		{_'Add role'}
 	</a>
@@ -33,7 +33,7 @@
 					</td>
 					<td class="text-right">
 						<a class="btn btn-sm btn-warning" n:href=":Admin:Role:, 'id' => $role->id"><span class="fa fa-edit"></span></a>
-						<a class="btn btn-sm btn-danger ajax-modal" n:href=":Admin:Role:delete, 'id' => $role->id"><span class="fa fa-trash-o"></span></a>
+						<a class="btn btn-sm btn-danger" n:href=":Admin:Role:delete, 'id' => $role->id"><span class="fa fa-trash-o"></span></a>
 					</td>
 				</tr>
 			</tbody>
