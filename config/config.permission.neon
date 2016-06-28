@@ -43,4 +43,3 @@ services:
 doctrine:
 	metadata:
 		Wame\PermissionModule\Entities: %appDir%/../vendor/wame/PermissionModule/entities
-		Wame\PermissionModule\Repositories: %appDir%/../vendor/wame/PermissionModule/repositories

@@ -12,6 +12,10 @@ class PermissionObject extends \Nette\Security\Permission
 
 	public function __construct() 
 	{
+		/*
+		 * ! WARNING !
+		 * Nemaju byt role nacitane dynamicky?
+		 */
 		$this->addRole('guest');
 		$this->addRole('client', ['guest']);
 		$this->addRole('moderator', ['client']);

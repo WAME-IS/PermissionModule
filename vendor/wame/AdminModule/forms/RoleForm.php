@@ -18,6 +18,10 @@ class RoleForm extends FormFactory
 	public function __construct(
 		EntityManager $entityManager
 	) {
+		/*
+		* ! WARNING !
+		* Chceme pouzivat pristup cez repository?
+		*/
 		$this->roleEntity = $entityManager->getRepository(RoleEntity::class);
 		$this->roleList = $this->roleEntity->findPairs(['status' => RoleRepository::STATUS_ACTIVE], 'name');
 	}
