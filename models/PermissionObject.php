@@ -5,7 +5,7 @@ namespace Wame\PermissionModule\Models;
 class PermissionObject extends \Nette\Security\Permission 
 {
 	const ACESS_OWN_CHAR = '*';
-	const STRICT_ACTIONS = 'true';
+	const STRICT_ACTIONS = true;
 
 	/** @var array */
 	private $resourceActions = [];
@@ -58,7 +58,7 @@ class PermissionObject extends \Nette\Security\Permission
 
 	protected function setRule($toAdd, $type, $roles, $resources, $privileges, $assertion = null) 
 	{
-		if (self::STRICT_ACTIONS) {
+		if (\Tracy\Debugger::isEnabled()) {
 			if (is_array($privileges)) {
 				foreach ($privileges as $privilege) {
 					if (is_array($resources)) {
