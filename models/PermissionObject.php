@@ -2,10 +2,14 @@
 
 namespace Wame\PermissionModule\Models;
 
-class PermissionObject extends \Nette\Security\Permission 
+use Exception;
+use Nette\Security\Permission;
+use Nette\Utils\Strings;
+use Tracy\Debugger;
+
+class PermissionObject extends Permission 
 {
 	const ACESS_OWN_CHAR = '*';
-	const STRICT_ACTIONS = true;
 
 	/** @var array */
 	private $resourceActions = [];
@@ -52,13 +56,13 @@ class PermissionObject extends \Nette\Security\Permission
 		if (isset($this->resourceActions[$resource])) {
 			return $this->resourceActions[$resource];
 		} else {
-			throw new \Exception("Actions for resource \"$resource\" are undefined");
+			throw new Exception("Actions for resource \"$resource\" are undefined");
 		}
 	}
 
 	protected function setRule($toAdd, $type, $roles, $resources, $privileges, $assertion = null) 
 	{
-		if (\Tracy\Debugger::isEnabled()) {
+		if (Debugger::isEnabled()) {
 			if (is_array($privileges)) {
 				foreach ($privileges as $privilege) {
 					if (is_array($resources)) {
@@ -85,12 +89,12 @@ class PermissionObject extends \Nette\Security\Permission
 
 	private function checkActionValidity($resource, $action) 
 	{
-		if (\Nette\Utils\Strings::endsWith($action, self::ACESS_OWN_CHAR)) {
+		if (Strings::endsWith($action, self::ACESS_OWN_CHAR)) {
 			$action = substr($action, 0, -1);
 		}
 
 		if (!in_array($action, $this->getResourceActions($resource))) {
-			throw new \Exception("Permission action \"$action\" is not defined for resource \"$resource\"");
+			throw new Exception("Permission action \"$action\" is not defined for resource \"$resource\"");
 		}
 	}
 
