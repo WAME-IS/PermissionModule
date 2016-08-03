@@ -1,8 +1,9 @@
 {block content}
 	<h1>{$siteTitle}</h1>
-	
-	<div class="row">
-		<div class="col-sm-10 col-md-8 col-lg-6">
-			{control roleForm}
-		</div>
-	</div>
+
+	{if count($roleEntity) == 0}
+		<div class="lead text-muted">{_'You do not have define any roles.'}</div>
+		<a class="btn btn-success" n:href=":Admin:Role:, 'id' => null">{_'Create first role'}</a>
+	{else}
+        {control roleGrid}
+	{/if}

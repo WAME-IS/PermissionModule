@@ -30,18 +30,18 @@ class AdminMenuItem implements \Wame\MenuModule\Models\IMenuItem
 		$item = new Item();
 		$item->setName('user');
 		
-		$item->addNode($this->roles(), 'roles');
+		$item->addNode($this->role(), 'role');
 		
 		return $item->getItem();
 	}
 	
 	
-	private function roles()
+	private function role()
 	{
 		$item = new Item();
 		$item->setName('user-roles');
 		$item->setTitle(_('Roles'));
-		$item->setLink($this->linkGenerator->link('Admin:Roles:', ['id' => null]));
+		$item->setLink($this->linkGenerator->link('Admin:Role:', ['id' => null]));
 		
 		return $item->getItem();
 	}

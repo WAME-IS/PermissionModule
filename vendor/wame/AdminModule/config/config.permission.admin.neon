@@ -1,2 +1,12 @@
 services:
-	- Wame\PermissionModule\Vendor\Wame\AdminModule\Forms\RoleForm
+    - Wame\PermissionModule\Vendor\Wame\AdminModule\Forms\RoleForm
+
+    RoleGrid:
+        class: Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\RoleGrid
+        setup:
+            - addColumn(Wame\DataGridControl\IdGridColumn())
+            - addColumn(Wame\DataGridControl\NameGridColumn())
+            - addColumn(Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\Columns\InheritByGridColumn())
+            - addColumn(Wame\DataGridControl\EditGridAction())
+            - addColumn(Wame\DataGridControl\DeleteGridAction())
+            - addColumn(Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\Columns\AddGridToolbarButton())
