@@ -7,32 +7,17 @@ use Wame\PermissionModule\Entities\RoleEntity;
 use Wame\PermissionModule\Repositories\RoleRepository;
 use Wame\PermissionModule\Vendor\Wame\AdminModule\Forms\RoleForm;
 use Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\RoleGrid;
-use Wame\DataGridControl\IDataGridControlFactory;
 
 class RolePresenter extends BasePresenter
-{	
-	/** @var RoleEntity */
-	private $roleEntity;
-	
+{
 	/** @var RoleRepository @inject */
 	public $roleRepository;
 	
 	/** @var RoleForm @inject */
 	public $roleForm;
     
-    /** @var IDataGridControlFactory @inject */
-	public $gridControl;
-    
     /** @var RoleGrid @inject */
 	public $roleGrid;
-	
-    
-	public function startup() 
-	{
-		parent::startup();
-		
-		$this->roleEntity = $this->entityManager->getRepository(RoleEntity::class);
-	}
     
     
     /** actions ***************************************************************/
@@ -58,7 +43,7 @@ class RolePresenter extends BasePresenter
 	
 	public function handleDelete()
 	{
-		$role = $this->roleEntity->findOneBy(['id' => $this->id]);
+        $role = $this->roleRepository->get(['id' => $this->id]);
 		$role->status = RoleRepository::STATUS_BLOCKED;
 		
 		$this->flashMessage(_('Role has been successfully deleted'), 'success');
@@ -71,7 +56,7 @@ class RolePresenter extends BasePresenter
     public function renderDefault()
 	{
 		$this->template->siteTitle = _('User roles');
-		$this->template->roleEntity = $this->roleEntity->findBy(['status' => RoleRepository::STATUS_ACTIVE]);
+		$this->template->roles = $this->roleRepository->find(['status' => RoleRepository::STATUS_ACTIVE]);
 	}
     
     public function renderEdit()
@@ -92,6 +77,11 @@ class RolePresenter extends BasePresenter
     
     /** components ************************************************************/
     
+    /**
+     * Component role form component
+     * 
+     * @return type
+     */
     protected function createComponentRoleForm()
 	{
 		$form = $this->roleForm->create();
@@ -112,6 +102,12 @@ class RolePresenter extends BasePresenter
 		return $form;
 	}
     
+    /**
+     * Fole form succeeded callback
+     * 
+     * @param Form $form    form
+     * @param aray $values  values
+     */
     public function roleFormSucceeded(Form $form, $values)
 	{
 		if ($this->id) {
@@ -136,18 +132,16 @@ class RolePresenter extends BasePresenter
     
     
     /**
-	 * Create role grid component
-	 * @param type $name
-	 * @return type
-	 */
+     * Role grid component
+     * 
+     * @return RoleGrid
+     */
 	protected function createComponentRoleGrid()
 	{
         $qb = $this->roleRepository->createQueryBuilder('a');
-		$grid = $this->gridControl->create();
-		$grid->setDataSource($qb);
-		$grid->setProvider($this->roleGrid);
+		$this->roleGrid->setDataSource($qb);
 		
-		return $grid;
+		return $this->roleGrid;
 	}
     
     

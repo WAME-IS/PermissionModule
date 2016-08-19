@@ -2,11 +2,12 @@
 
 namespace Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\Columns;
 
-use Wame\DataGridControl\BaseGridColumn;
+use Wame\DataGridControl\BaseGridItem;
 
-class InheritByGridColumn extends BaseGridColumn
+class InheritByGridColumn extends BaseGridItem
 {
-	public function addColumn($grid) {
+    /** {@inheritDoc} */
+	public function render($grid) {
 		$grid->addColumnText('inheritBy', _('Inherit by'), 'inherit.name')
                 ->setSortable()
 				->setFilterText();

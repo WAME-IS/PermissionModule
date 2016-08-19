@@ -2,7 +2,7 @@
 
 namespace Wame\PermissionModule\Vendor\Wame\AdminModule\Grids;
 
-class RoleGrid extends \Wame\DataGridControl\GridProvider
+class RoleGrid extends \Wame\DataGridControl\DataGridControl
 {
 	
 }
