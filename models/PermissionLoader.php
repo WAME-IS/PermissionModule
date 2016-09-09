@@ -3,8 +3,6 @@
 namespace Wame\PermissionModule\Models;
 
 use Nette\Object;
-use Kdyby\Doctrine\EntityManager;
-use Wame\PermissionModule\Entities\PermissionEntity;
 use Wame\PermissionModule\Repositories\PermissionRepository;
 
 class PermissionLoader extends Object 
@@ -12,22 +10,19 @@ class PermissionLoader extends Object
 	/** @var PermissionObject */
 	private $permission;
 
-	/** @var EntityManager */
-	/*
-	 * ! WARNING !
-	 * Chceme pouzivat pristup cez repository?
-	 */
-	private $entityManager;
-
-	public function __construct(PermissionObject $permission, EntityManager $entityManager) 
+    /** @var PermissionRepository */
+    private $permissionRepository;
+    
+    
+	public function __construct(PermissionObject $permission, PermissionRepository $permissionRepository) 
 	{
 		$this->permission = $permission;
-		$this->entityManager = $entityManager;
+		$this->permissionRepository = $permissionRepository;
 	}
 
 	public function setupPermissions() 
 	{
-		$permissions = $this->entityManager->getRepository(PermissionEntity::class)->findBy(['status' => PermissionRepository::STATUS_ENABLED]);
+		$permissions = $this->permissionRepository->find(['status' => PermissionRepository::STATUS_ENABLED]);
 
 		foreach ($permissions as $permission) {
 			if ($permission->tag == PermissionRepository::TAG_ALLOW) {

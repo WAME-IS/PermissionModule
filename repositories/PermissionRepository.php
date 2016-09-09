@@ -2,7 +2,10 @@
 
 namespace Wame\PermissionModule\Repositories;
 
-class PermissionRepository extends \Wame\Core\Repositories\BaseRepository
+use Wame\Core\Repositories\BaseRepository;
+use Wame\PermissionModule\Entities\PermissionEntity;
+
+class PermissionRepository extends BaseRepository
 {
 	const STATUS_DISABLED = 0;
 	const STATUS_ENABLED = 1;
@@ -11,6 +14,12 @@ class PermissionRepository extends \Wame\Core\Repositories\BaseRepository
 	const TAG_DENY = 'd';
 	const TAG_NONE = 'n';
 	const TAG_OWN = 'o';
+    
+    
+    public function __construct()
+    {
+        parent::__construct(PermissionEntity::class);
+    }
 	
 	public function getAllowedTags()
 	{

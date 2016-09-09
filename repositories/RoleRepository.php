@@ -2,24 +2,22 @@
 
 namespace Wame\PermissionModule\Repositories;
 
+use Wame\Core\Repositories\BaseRepository;
 use Wame\PermissionModule\Entities\RoleEntity;
 
-class RoleRepository extends \Wame\Core\Repositories\BaseRepository
+class RoleRepository extends BaseRepository
 {
 	const STATUS_BLOCKED = 0;
 	const STATUS_ACTIVE = 1;
 	
+    
 	/** @var RoleEntity */
 	private $roleEntity;
 	
 	
-	public function __construct(
-		\Nette\DI\Container $container, 
-		\Kdyby\Doctrine\EntityManager $entityManager, 
-		\h4kuna\Gettext\GettextSetup $translator, 
-		\Nette\Security\User $user
-	) {
-		parent::__construct($container, $entityManager, $translator, $user, RoleEntity::class);
+	public function __construct()
+    {
+		parent::__construct(RoleEntity::class);
 	}
 	
 	
