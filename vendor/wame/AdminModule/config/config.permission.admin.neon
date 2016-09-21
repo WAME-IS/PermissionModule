@@ -4,9 +4,9 @@ services:
     RoleGrid:
         class: Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\RoleGrid
         setup:
-            - add(Wame\DataGridControl\Columns\Id())
-            - add(Wame\DataGridControl\Columns\Name())
-            - add(Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\Columns\InheritByGridColumn())
+            - add(Wame\DataGridControl\Columns\Id(), null, {priority: 90})
+            - add(Wame\DataGridControl\Columns\Name(), null, {priority: 80})
+            - add(Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\Columns\InheritByGridColumn(), null, {priority: 70})
             - add(Wame\DataGridControl\Actions\Edit())
             - add(Wame\DataGridControl\Actions\Delete())
             - add(Wame\DataGridControl\ToolbarButtons\Add())
