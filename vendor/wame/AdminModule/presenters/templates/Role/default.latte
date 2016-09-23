@@ -1,9 +1,14 @@
 {block content}
-	<h1>{$siteTitle}</h1>
 
-	{if count($roles) == 0}
-		<div class="lead text-muted">{_'You do not have define any roles.'}</div>
-		<a class="btn btn-success" n:href=":Admin:Role:, 'id' => null">{_'Create first role'}</a>
-	{else}
-        {control roleGrid}
-	{/if}
+{if count($roles) == 0}
+    <div class="empty-block">
+        <p>{_'You do not have define any roles.'}</p>
+        
+        <a class="btn btn-success btn-lg" n:href=":Admin:Role:, 'id' => null">
+            <i class="material-icons">add_circle_outline</i>
+            {_'Create first role'}
+        </a>
+    </div>
+{else}
+    {control roleGrid}
+{/if}

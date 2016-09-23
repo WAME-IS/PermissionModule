@@ -9,4 +9,4 @@ services:
             - add(Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\Columns\InheritByGridColumn(), null, {priority: 70})
             - add(Wame\DataGridControl\Actions\Edit())
             - add(Wame\DataGridControl\Actions\Delete())
-            - add(Wame\DataGridControl\ToolbarButtons\Add())
+            - add(Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\ToolbarButtons\Add())
