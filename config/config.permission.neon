@@ -23,19 +23,15 @@ services:
         class: Wame\PermissionModule\Repositories\RoleRepository
         inject: yes
 
-    # Factories
+
+    # Form containers
     - Wame\PermissionModule\Forms\IRoleFormContainerFactory
+    - Wame\PermissionModule\Forms\Containers\IRoleContainerFactory
 
-
-    # Create user form in administration
-    CreateUserForm:
+    # Forms
+    Admin.UserFormBuilder:
         setup:
-            - addFormContainer(Wame\PermissionModule\Forms\RoleFormContainer(), 'RoleFormContainer', 80)
-
-    # Edit user form in administration
-    EditUserForm:
-        setup:
-            - addFormContainer(Wame\PermissionModule\Forms\RoleFormContainer(), 'RoleFormContainer', 80)
+            - add(@Wame\PermissionModule\Forms\Containers\IRoleContainerFactory(), 'RoleContainer', {priority: 80})
 
 
 doctrine:
