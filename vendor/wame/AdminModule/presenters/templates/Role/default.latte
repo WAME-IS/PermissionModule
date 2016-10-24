@@ -1,14 +1,14 @@
 {block content}
 
-{if count($roles) == 0}
+{if $countRoles == 0}
     <div class="empty-block">
         <p>{_'You do not have define any roles.'}</p>
         
-        <a class="btn btn-success btn-lg" n:href=":Admin:Role:, 'id' => null">
+        <a class="btn btn-success btn-lg ajax-modal" n:href=":Admin:Role:, 'id' => null">
             <i class="material-icons">add_circle_outline</i>
             {_'Create first role'}
         </a>
     </div>
 {else}
-    {control roleGrid}
+    {control grid}
 {/if}

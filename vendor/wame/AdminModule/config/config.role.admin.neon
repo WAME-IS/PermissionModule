@@ -1,0 +1,24 @@
+services:
+    - Wame\PermissionModule\Vendor\Wame\AdminModule\Forms\Containers\INameContainerFactory
+    - Wame\PermissionModule\Vendor\Wame\AdminModule\Forms\Containers\IInheritContainerFactory
+
+
+    Admin.RoleFormBuilder:
+        class: Wame\DynamicObject\Forms\EntityFormBuilder
+        setup:
+            - setRepository(@RoleRepository)
+            - redirectTo('Role:', { 'id' : null })
+            - add(@Wame\PermissionModule\Vendor\Wame\AdminModule\Forms\Containers\INameContainerFactory, 'NameContainer', {priority: 100})
+            - add(@Wame\PermissionModule\Vendor\Wame\AdminModule\Forms\Containers\IInheritContainerFactory, 'InheritContainer', {priority: 50})
+            - add(@Wame\DynamicObject\Forms\Containers\ISubmitContainerFactory, 'SubmitContainer', {priority: 10})
+
+
+    Admin.RoleGrid:
+        class: Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\RoleGrid
+        setup:
+            - add(Wame\DataGridControl\Columns\Id(), null, {priority: 90})
+            - add(Wame\DataGridControl\Columns\Name(), null, {priority: 80})
+            - add(Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\Columns\InheritByGridColumn(), null, {priority: 70})
+            - add(Wame\DataGridControl\Actions\EditModal())
+            - add(Wame\DataGridControl\Actions\Delete())
+            - add(Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\ToolbarButtons\Add())

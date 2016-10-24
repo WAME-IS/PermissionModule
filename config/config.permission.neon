@@ -3,10 +3,10 @@ services:
         class: Wame\PermissionModule\Models\PermissionObject
         setup:
             - addResource('role')
-            - addResourceAction('role', 'view')
-            - allow('admin', 'role', 'view')
-            - addResourceAction('role', 'add')
-            - allow('admin', 'role', 'add')
+            - addResourceAction('role', 'default')
+            - allow('admin', 'role', 'default')
+            - addResourceAction('role', 'create')
+            - allow('admin', 'role', 'create')
             - addResourceAction('role', 'edit')
             - allow('admin', 'role', 'edit')
             - addResourceAction('role', 'delete')

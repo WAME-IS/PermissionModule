@@ -2,147 +2,120 @@
 
 namespace App\AdminModule\Presenters;
 
-use Nette\Application\UI\Form;
+use Wame\DynamicObject\Vendor\Wame\AdminModule\Presenters\AdminFormPresenter;
 use Wame\PermissionModule\Entities\RoleEntity;
 use Wame\PermissionModule\Repositories\RoleRepository;
-use Wame\PermissionModule\Vendor\Wame\AdminModule\Forms\RoleForm;
-use Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\RoleGrid;
 
-class RolePresenter extends BasePresenter
+
+class RolePresenter extends AdminFormPresenter
 {
 	/** @var RoleRepository @inject */
-	public $roleRepository;
-	
-	/** @var RoleForm @inject */
-	public $roleForm;
-    
-    /** @var RoleGrid @inject */
-	public $roleGrid;
-    
-    
+	public $repository;
+
+	/** @var RoleEntity */
+	protected $entity;
+
+	/** @var int */
+	private $countRoles;
+
+
     /** actions ***************************************************************/
-    
+
+    public function actionDefault()
+    {
+        if (!$this->user->isAllowed('role', 'default')) {
+			$this->flashMessage(_('To enter this section you have not sufficient privileges.'), 'danger');
+			$this->redirect('parent');
+		}
+
+        $this->countRoles = $this->repository->countBy([]);
+    }
+
+
+    public function actionCreate()
+    {
+        if (!$this->user->isAllowed('role', 'create')) {
+			$this->flashMessage(_('To enter this section you have not sufficient privileges.'), 'danger');
+			$this->redirect('parent');
+		}
+    }
+
+
     public function actionEdit()
     {
         if (!$this->user->isAllowed('role', 'edit')) {
 			$this->flashMessage(_('To enter this section you have not sufficient privileges.'), 'danger');
 			$this->redirect('parent');
 		}
+
+        $this->entity = $this->repository->get(['id' => $this->id]);
     }
-    
-    public function actionCreate()
+
+
+    public function actionDelete()
     {
-        if (!$this->user->isAllowed('role', 'add')) {
+        if (!$this->user->isAllowed('role', 'delete')) {
 			$this->flashMessage(_('To enter this section you have not sufficient privileges.'), 'danger');
 			$this->redirect('parent');
 		}
+
+        $this->entity = $this->repository->get(['id' => $this->id]);
     }
-    
-    
+
+
     /** handles ***************************************************************/
-	
+
 	public function handleDelete()
 	{
-        $role = $this->roleRepository->get(['id' => $this->id]);
-		$role->status = RoleRepository::STATUS_BLOCKED;
-		
-		$this->flashMessage(_('Role has been successfully deleted'), 'success');
-		$this->redirect(':Admin:Roles:', ['id' => null]);
+        $this->repository->changeStatus(['id' => $this->id], RoleRepository::STATUS_BLOCKED);
+
+		$this->flashMessage(sprintf(_('Role %s has been successfully deleted'), $this->entity->getName()), 'success');
+		$this->redirect(':Admin:Role:', ['id' => null]);
 	}
 
-    
+
     /** renders ***************************************************************/
-	
+
     public function renderDefault()
 	{
 		$this->template->siteTitle = _('User roles');
-		$this->template->roles = $this->roleRepository->find(['status' => RoleRepository::STATUS_ACTIVE]);
+		$this->template->countRoles = $this->countRoles;
 	}
-    
+
+
+    public function renderCreate()
+    {
+        $this->template->siteTitle = _('Create user role');
+    }
+
+
     public function renderEdit()
     {
         $this->template->siteTitle = _('Edit user role');
+        $this->template->subTitle = $this->entity->getName();
     }
-    
-    public function renderCreate()
-    {
-        $this->template->siteTitle = _('Add user role');
-    }
-	
+
+
 	public function renderDelete()
 	{
-		$this->template->siteTitle = _('Deleting role');
+		$this->template->siteTitle = _('Delete role');
+        $this->template->subTitle = $this->entity->getName();
 	}
-    
-    
-    /** components ************************************************************/
-    
-    /**
-     * Component role form component
-     * 
-     * @return type
-     */
-    protected function createComponentRoleForm()
-	{
-		$form = $this->roleForm->create();
-		$form->setRenderer(new \Tomaj\Form\Renderer\BootstrapVerticalRenderer);
-		
-		if ($this->id) {
-			$defaults = $this->roleEntity->findOneBy(['id' => $this->id]);
 
-			$form['name']->setDefaultValue($defaults->name);
 
-			if ($defaults->inherit) {
-				$form['inherit']->setDefaultValue($defaults->inherit->id);
-			}
-		}
-		
-		$form->onSuccess[] = [$this, 'roleFormSucceeded'];
-		
-		return $form;
-	}
-    
-    /**
-     * Fole form succeeded callback
-     * 
-     * @param Form $form    form
-     * @param aray $values  values
-     */
-    public function roleFormSucceeded(Form $form, $values)
-	{
-		if ($this->id) {
-			$this->roleRepository->setRole($this->id, $values);
+    /** abstract methods ******************************************************/
 
-			$this->flashMessage(_('The role was successfully update'), 'success');
-		} else {
-			$find = $this->roleEntity->countBy(['name' => $values['name'], 'status' => RoleRepository::STATUS_ACTIVE]);
-			
-			if ($find) {
-				$this->flashMessage(_('Role with that name already exists'), 'warning');
-				$this->redirect('this');
-			}
-			
-			$this->roleRepository->addRole($values);
+    /** {@inheritdoc} */
+    protected function getFormBuilderServiceAlias()
+    {
+        return 'Admin.RoleFormBuilder';
+    }
 
-			$this->flashMessage(_('The role was created successfully'), 'success');
-		}
-		
-		$this->redirect('this');
-	}
-    
-    
-    /**
-     * Role grid component
-     * 
-     * @return RoleGrid
-     */
-	protected function createComponentRoleGrid()
-	{
-        $qb = $this->roleRepository->createQueryBuilder('a');
-		$this->roleGrid->setDataSource($qb);
-		
-		return $this->roleGrid;
-	}
-    
-    
+
+    /** {@inheritdoc} */
+    protected function getGridServiceAlias()
+    {
+        return 'Admin.RoleGrid';
+    }
+
 }
