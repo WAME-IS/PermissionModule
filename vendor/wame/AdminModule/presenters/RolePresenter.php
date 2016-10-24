@@ -25,7 +25,7 @@ class RolePresenter extends AdminFormPresenter
     {
         if (!$this->user->isAllowed('role', 'default')) {
 			$this->flashMessage(_('To enter this section you have not sufficient privileges.'), 'danger');
-			$this->redirect('parent');
+			$this->redirect(':Admin:Dashboad:');
 		}
 
         $this->countRoles = $this->repository->countBy([]);
@@ -36,7 +36,7 @@ class RolePresenter extends AdminFormPresenter
     {
         if (!$this->user->isAllowed('role', 'create')) {
 			$this->flashMessage(_('To enter this section you have not sufficient privileges.'), 'danger');
-			$this->redirect('parent');
+			$this->redirect(':Admin:Role:');
 		}
     }
 
@@ -45,7 +45,7 @@ class RolePresenter extends AdminFormPresenter
     {
         if (!$this->user->isAllowed('role', 'edit')) {
 			$this->flashMessage(_('To enter this section you have not sufficient privileges.'), 'danger');
-			$this->redirect('parent');
+			$this->redirect(':Admin:Role:');
 		}
 
         $this->entity = $this->repository->get(['id' => $this->id]);
@@ -56,7 +56,7 @@ class RolePresenter extends AdminFormPresenter
     {
         if (!$this->user->isAllowed('role', 'delete')) {
 			$this->flashMessage(_('To enter this section you have not sufficient privileges.'), 'danger');
-			$this->redirect('parent');
+			$this->redirect(':Admin:Role:');
 		}
 
         $this->entity = $this->repository->get(['id' => $this->id]);
