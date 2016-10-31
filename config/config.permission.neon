@@ -28,6 +28,10 @@ services:
             - allow('admin', 'Admin:Role', 'delete')
 
 
+    # Events
+    - {class: Wame\PermissionModule\Events\PresenterListener, tags: [run]}
+
+
     - Wame\PermissionModule\Models\PermissionLoader
 
 
