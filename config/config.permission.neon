@@ -1,18 +1,35 @@
 services:
+    # Permissions
     PermissionObject:
         class: Wame\PermissionModule\Models\PermissionObject
         setup:
-            - addResource('role')
-            - addResourceAction('role', 'default')
-            - allow('admin', 'role', 'default')
-            - addResourceAction('role', 'create')
-            - allow('admin', 'role', 'create')
-            - addResourceAction('role', 'edit')
-            - allow('admin', 'role', 'edit')
-            - addResourceAction('role', 'delete')
-            - allow('admin', 'role', 'delete')
+            # Default
+            - addResource('Default')
+            - addResourceAction('Default', 'default')
+            - allow('client', 'Default', 'default')
+            - addResourceAction('Default', 'show')
+            - allow('client', 'Default', 'show')
+            - addResourceAction('Default', 'create')
+            - allow('moderator', 'Default', 'create')
+            - addResourceAction('Default', 'edit')
+            - allow('moderator', 'Default', 'edit')
+            - addResourceAction('Default', 'delete')
+            - allow('admin', 'Default', 'delete')
+
+            # Role
+            - addResource('Admin:Role')
+            - addResourceAction('Admin:Role', 'default')
+            - allow('admin', 'Admin:Role', 'default')
+            - addResourceAction('Admin:Role', 'create')
+            - allow('admin', 'Admin:Role', 'create')
+            - addResourceAction('Admin:Role', 'edit')
+            - allow('admin', 'Admin:Role', 'edit')
+            - addResourceAction('Admin:Role', 'delete')
+            - allow('admin', 'Admin:Role', 'delete')
+
 
     - Wame\PermissionModule\Models\PermissionLoader
+
 
     # Repositories
     PermissionRepository:
@@ -27,6 +44,7 @@ services:
     # Form containers
     - Wame\PermissionModule\Forms\IRoleFormContainerFactory
     - Wame\PermissionModule\Forms\Containers\IRoleContainerFactory
+
 
     # Forms
     Admin.UserFormBuilder:

@@ -10,8 +10,6 @@
         }
     ],
     "require": {
-        "wame/Core": "*",
-        "wame/MenuModule": "*",
         "wame/UserModule": "*"
     },
     "autoload": {

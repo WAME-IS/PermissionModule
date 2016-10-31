@@ -11,9 +11,11 @@ class PermissionObject extends Permission
 {
 	const ACESS_OWN_CHAR = '*';
 
+    
 	/** @var array */
 	private $resourceActions = [];
 
+    
 	public function __construct() 
 	{
 		/*
@@ -26,6 +28,7 @@ class PermissionObject extends Permission
 		$this->addRole('admin', ['moderator']);
 	}
 
+    
 	public function isAllowedObject($object, $user, $role, $resource, $privilege) 
 	{
 		if (parent::isAllowed($role, $resource, $privilege)) {
