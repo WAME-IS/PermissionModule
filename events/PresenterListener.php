@@ -41,18 +41,20 @@ class PresenterListener extends Object
         $presenterModule = substr(\Wame\Utils\Validators::validateModuleName($presenter->getModule()), 0, -6);
         $presenterName = $presenter->getName();
         
+        $action = $presenter->getAction();
+        $resources = $this->permissionObject->getResources();
         $resource = 'Default';
         
-        if(in_array($presenterName, $this->permissionObject->getResources())) {
+        if(in_array($presenterName, $resources)) {
             $resource = $presenterName;
-        } else if (in_array($presenterModule, $this->permissionObject->getResources())) {
+        } else if (in_array($presenterModule, $resources)) {
             $resource = $presenterModule;
         }
         
-        if ($presenter->user->isAllowed($resource, $presenter->getAction())) {
+        if (!$presenter->user->isAllowed($resource, $action)) {
             // TODO: redirect to parent
 //            $presenter->redirect(':Admin:Dashboard:');
-            \Tracy\Debugger::barDump("Not allowed!");
+            \Tracy\Debugger::barDump("Not allowed!", "Resource: $resource | Action: $action");
         }
     }
 
