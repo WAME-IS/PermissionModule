@@ -1,0 +1,100 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PermissionModule\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2016-11-07T09:51:16+01:00\n"
+"PO-Revision-Date: 2016-11-07T09:51:16+01:00\n"
+"Language: en\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: gettext;__;ngettext;n__;pgettext;p__;dgettext;d__;dpgettext;dp__;npgettext;np__;dnpgettext;dnp__;noop;noop__;_\n"
+"X-Poedit-Basepath: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule\n"
+"X-Poedit-SearchPath-0: .\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Domain: PermissionModule\n"
+
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/forms/containers/role/RoleContainer.php:32
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/forms/role/RoleFormContainer.php:34
+msgid "Role"
+msgstr ""
+
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/forms/role/RoleFormContainer.php:35
+msgid "Select a role"
+msgstr ""
+
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/repositories/PermissionRepository.php:27
+msgid "Allow"
+msgstr ""
+
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/repositories/PermissionRepository.php:28
+msgid "Deny"
+msgstr ""
+
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/repositories/PermissionRepository.php:29
+msgid "None"
+msgstr ""
+
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/repositories/PermissionRepository.php:30
+msgid "Own"
+msgstr ""
+
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/vendor/wame/AdminModule/forms/containers/inheritBy/InheritContainer.php:39
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/vendor/wame/AdminModule/grids/columns/InheritByGridColumn.php:11
+msgid "Inherit by"
+msgstr ""
+
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/vendor/wame/AdminModule/forms/containers/inheritBy/InheritContainer.php:40
+msgid "Select inherit role"
+msgstr ""
+
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/vendor/wame/AdminModule/forms/containers/name/NameContainer.php:35
+msgid "Name"
+msgstr ""
+
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/vendor/wame/AdminModule/forms/containers/name/NameContainer.php:36
+msgid "Please enter name"
+msgstr ""
+
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/vendor/wame/AdminModule/forms/containers/name/NameContainer.php:53
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/vendor/wame/AdminModule/forms/containers/name/NameContainer.php:66
+msgid "Role with that name already exists."
+msgstr ""
+
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/vendor/wame/AdminModule/grids/toolbarButtons/Add.php:12
+msgid "Create role"
+msgstr ""
+
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/vendor/wame/AdminModule/presenters/RolePresenter.php:27
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/vendor/wame/AdminModule/presenters/RolePresenter.php:38
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/vendor/wame/AdminModule/presenters/RolePresenter.php:47
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/vendor/wame/AdminModule/presenters/RolePresenter.php:58
+msgid "To enter this section you have not sufficient privileges."
+msgstr ""
+
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/vendor/wame/AdminModule/presenters/RolePresenter.php:72
+msgid "Role %s has been successfully deleted"
+msgstr ""
+
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/vendor/wame/AdminModule/presenters/RolePresenter.php:81
+msgid "User roles"
+msgstr ""
+
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/vendor/wame/AdminModule/presenters/RolePresenter.php:88
+msgid "Create user role"
+msgstr ""
+
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/vendor/wame/AdminModule/presenters/RolePresenter.php:94
+msgid "Edit user role"
+msgstr ""
+
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/vendor/wame/AdminModule/presenters/RolePresenter.php:101
+msgid "Delete role"
+msgstr ""
+
+#: /Users/MacMini2/Weby/GIT/cms-wame-admin-4.0.0/vendor/wame/PermissionModule/vendor/wame/MenuModule/components/MenuControl/AdminMenu/AdminMenuItem.php:43
+msgid "Roles"
+msgstr ""
