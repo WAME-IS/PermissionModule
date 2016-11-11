@@ -16,17 +16,6 @@ services:
             - addResourceAction('Default', 'delete')
             - allow('admin', 'Default', 'delete')
 
-            # Role
-            - addResource('Admin:Role')
-            - addResourceAction('Admin:Role', 'default')
-            - allow('admin', 'Admin:Role', 'default')
-            - addResourceAction('Admin:Role', 'create')
-            - allow('admin', 'Admin:Role', 'create')
-            - addResourceAction('Admin:Role', 'edit')
-            - allow('admin', 'Admin:Role', 'edit')
-            - addResourceAction('Admin:Role', 'delete')
-            - allow('admin', 'Admin:Role', 'delete')
-
 
     # Events
     - {class: Wame\PermissionModule\Events\PresenterListener, tags: [run]}

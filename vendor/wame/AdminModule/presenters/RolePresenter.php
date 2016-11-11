@@ -5,61 +5,31 @@ namespace App\AdminModule\Presenters;
 use Wame\DynamicObject\Vendor\Wame\AdminModule\Presenters\AdminFormPresenter;
 use Wame\PermissionModule\Entities\RoleEntity;
 use Wame\PermissionModule\Repositories\RoleRepository;
-
+use Wame\PermissionModule\Models\PermissionObject;
 
 class RolePresenter extends AdminFormPresenter
 {
 	/** @var RoleRepository @inject */
 	public $repository;
 
+    /** @var PermissionObject @inject */
+    public $permissionObject;
+    
 	/** @var RoleEntity */
 	protected $entity;
-
-	/** @var int */
-	private $countRoles;
 
 
     /** actions ***************************************************************/
 
-    public function actionDefault()
+    public function actionShow()
     {
-        if (!$this->user->isAllowed('role', 'default')) {
-			$this->flashMessage(_('To enter this section you have not sufficient privileges.'), 'danger');
-			$this->redirect(':Admin:Dashboad:');
-		}
-
-        $this->countRoles = $this->repository->countBy([]);
+        $this->entity = $this->getEntityById();
     }
-
-
-    public function actionCreate()
-    {
-        if (!$this->user->isAllowed('role', 'create')) {
-			$this->flashMessage(_('To enter this section you have not sufficient privileges.'), 'danger');
-			$this->redirect(':Admin:Role:');
-		}
-    }
-
-
-    public function actionEdit()
-    {
-        if (!$this->user->isAllowed('role', 'edit')) {
-			$this->flashMessage(_('To enter this section you have not sufficient privileges.'), 'danger');
-			$this->redirect(':Admin:Role:');
-		}
-
-        $this->entity = $this->repository->get(['id' => $this->id]);
-    }
-
-
+    
+    
     public function actionDelete()
     {
-        if (!$this->user->isAllowed('role', 'delete')) {
-			$this->flashMessage(_('To enter this section you have not sufficient privileges.'), 'danger');
-			$this->redirect(':Admin:Role:');
-		}
-
-        $this->entity = $this->repository->get(['id' => $this->id]);
+        $this->entity = $this->getEntityById();
     }
 
 
@@ -79,8 +49,18 @@ class RolePresenter extends AdminFormPresenter
     public function renderDefault()
 	{
 		$this->template->siteTitle = _('User roles');
-		$this->template->countRoles = $this->countRoles;
+		$this->template->count = $this->count;
 	}
+    
+    
+    public function renderShow()
+    {
+        $this->template->siteTitle = _('Show user permissions');
+        $this->template->subTitle = $this->entity->getName();
+        
+        $this->template->entity = $this->entity;
+        $this->template->permissionObject = $this->permissionObject;
+    }
 
 
     public function renderCreate()

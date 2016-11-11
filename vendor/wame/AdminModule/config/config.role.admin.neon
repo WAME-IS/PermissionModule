@@ -2,20 +2,21 @@ services:
     # Permissions
     PermissionObject:
         setup:
-            # Admin
-            - addResource('Admin')
-            - addResourceAction('Admin', 'default')
-            - allow('moderator', 'Admin', 'default')
-            - addResourceAction('Admin', 'show')
-            - allow('moderator', 'Admin', 'show')
-            - addResourceAction('Admin', 'create')
-            - allow('moderator', 'Admin', 'create')
-            - addResourceAction('Admin', 'edit')
-            - allow('moderator', 'Admin', 'edit')
-            - addResourceAction('Admin', 'delete')
-            - allow('admin', 'Admin', 'delete')
+            # Admin:Role
+            - addResource('Admin:Role')
+            - addResourceAction('Admin:Role', 'default')
+            - allow('admin', 'Admin:Role', 'default')
+            - addResourceAction('Admin:Role', 'show')
+            - allow('admin', 'Admin:Role', 'show')
+            - addResourceAction('Admin:Role', 'create')
+            - allow('admin', 'Admin:Role', 'create')
+            - addResourceAction('Admin:Role', 'edit')
+            - allow('admin', 'Admin:Role', 'edit')
+            - addResourceAction('Admin:Role', 'delete')
+            - allow('admin', 'Admin:Role', 'delete')
 
 
+    # Form containers
     - Wame\PermissionModule\Vendor\Wame\AdminModule\Forms\Containers\INameContainerFactory
     - Wame\PermissionModule\Vendor\Wame\AdminModule\Forms\Containers\IInheritContainerFactory
 
@@ -38,6 +39,7 @@ services:
             - add(Wame\DataGridControl\Columns\Id(), null, {priority: 90})
             - add(Wame\DataGridControl\Columns\Name(), null, {priority: 80})
             - add(Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\Columns\InheritByGridColumn(), null, {priority: 70})
+            - add(Wame\DataGridControl\Actions\Show())
             - add(Wame\DataGridControl\Actions\EditModal())
             - add(Wame\DataGridControl\Actions\Delete())
             - add(Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\ToolbarButtons\Add())

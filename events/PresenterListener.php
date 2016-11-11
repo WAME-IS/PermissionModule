@@ -52,9 +52,10 @@ class PresenterListener extends Object
         }
         
         if (!$presenter->user->isAllowed($resource, $action)) {
-            // TODO: redirect to parent
-//            $presenter->redirect(':Admin:Dashboard:');
             \Tracy\Debugger::barDump("Not allowed!", "Resource: $resource | Action: $action");
+//            $presenter->flashMessage(_('To enter this section you have not sufficient privileges.'), 'danger');
+            // TODO: redirect to route parent
+//            $presenter->redirect(':Admin:Dashboard:');
         }
     }
 
