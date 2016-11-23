@@ -16,18 +16,18 @@ class RoleContainer extends BaseContainer
 {
     /** @var array */
 	protected $roleList;
-    
-    
-    public function __construct(RoleRepository $roleRepository)
+
+
+    public function __construct(\Nette\DI\Container $container, RoleRepository $roleRepository)
     {
-        parent::__construct();
-        
+        parent::__construct($container);
+
         $this->roleList = $roleRepository->getRoles();
     }
     
-    
+
     /** {@inheritDoc} */
-    public function configure() 
+    public function configure()
 	{
         $this->addSelect('role', _('Role'), $this->roleList);
     }
@@ -37,13 +37,13 @@ class RoleContainer extends BaseContainer
 	{
         $this['role']->setDefaultValue($entity->getRole());
 	}
-    
+
     /** {@inheritDoc} */
     public function create($form, $values)
     {
         $form->getEntity()->setRole($values['role']);
     }
-    
+
     /** {@inheritDoc} */
     public function update($form, $values)
     {

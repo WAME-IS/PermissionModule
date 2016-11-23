@@ -21,9 +21,10 @@ class NameContainer extends BaseContainer
 
 
     public function __construct(
+        \Nette\DI\Container $container,
         RoleRepository $roleRepository
     ) {
-        parent::__construct();
+        parent::__construct($container);
 
         $this->roleRepository = $roleRepository;
     }
