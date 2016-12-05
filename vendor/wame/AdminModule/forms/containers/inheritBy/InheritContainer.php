@@ -46,7 +46,7 @@ class InheritContainer extends BaseContainer
     public function setDefaultValues($entity, $langEntity = null)
     {
         if ($entity->getInherit()) {
-            $this['inherit']->setDefaultValue($entity->getInherit()->getId());
+            $this['inherit']->setDefaultValue($entity->getInherit()->getName());
         }
     }
 
