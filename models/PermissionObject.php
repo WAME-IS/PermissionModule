@@ -56,7 +56,6 @@ class PermissionObject extends Permission
     
     public function getAllResourceActions()
     {
-        \Tracy\Debugger::barDump($this->resourceActions);
         return $this->resourceActions;
     }
 
