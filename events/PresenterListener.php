@@ -7,15 +7,21 @@ use Nette\Application\Application;
 use App\Core\Presenters\BasePresenter;
 use Wame\Core\Event\PresenterStageChangeEvent;
 use Wame\PermissionModule\Models\PermissionObject;
+use Wame\PermissionModule\Models\PermissionLoader;
 
 class PresenterListener extends Object 
 {
+    /** @var PermissionObject */
     private $permissionObject;
     
+    /** @var PermissionLoader */
+    private $permissionLoader;
     
-	public function __construct(Application $application, PermissionObject $permissionObject)
+    
+	public function __construct(Application $application, PermissionObject $permissionObject, PermissionLoader $permissionLoader)
     {
         $this->permissionObject = $permissionObject;
+        $this->permissionLoader = $permissionLoader;
         
         $application->onPresenter[] = [$this, 'onPresenter'];
 	}
@@ -26,6 +32,7 @@ class PresenterListener extends Object
         if ($presenter instanceof BasePresenter) {
             $presenter->onStageChange[] = function(PresenterStageChangeEvent $event) use ($presenter) {
                 if ($event->enters('startup')) {
+                    $this->permissionLoader->setupPermissions();
                     $this->checkPermission($presenter);
                 }
             };
@@ -50,6 +57,7 @@ class PresenterListener extends Object
         } else if (in_array($presenterModule, $resources)) {
             $resource = $presenterModule;
         }
+        
         
         if (!$presenter->user->isAllowed($resource, $action)) {
             \Tracy\Debugger::barDump("Not allowed!", "Resource: $resource | Action: $action");

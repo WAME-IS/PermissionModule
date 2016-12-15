@@ -38,8 +38,16 @@ services:
         setup:
             - add(Wame\DataGridControl\Columns\Id(), null, {priority: 90})
             - add(Wame\DataGridControl\Columns\Name(), null, {priority: 80})
-            - add(Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\Columns\InheritByGridColumn(), null, {priority: 70})
+            - add(Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\Columns\InheritBy(), null, {priority: 70})
             - add(Wame\DataGridControl\Actions\Show())
             - add(Wame\DataGridControl\Actions\EditModal())
             - add(Wame\DataGridControl\Actions\Delete())
             - add(Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\ToolbarButtons\Add())
+
+    Admin.PermissionGrid:
+        class: Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\PermissionGrid
+        setup:
+            - add(Wame\DataGridControl\Columns\Id(), null, {priority: 100})
+            - add(Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\Columns\Resource(), null, {priority: 90})
+            - add(Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\Columns\Action(), null, {priority: 80})
+            - add(Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\Columns\Permission(), null, {priority: 70})

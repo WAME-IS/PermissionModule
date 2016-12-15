@@ -4,13 +4,11 @@ namespace Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\Columns;
 
 use Wame\DataGridControl\BaseGridItem;
 
-class InheritByGridColumn extends BaseGridItem
+class Resource extends BaseGridItem
 {
     /** {@inheritDoc} */
 	public function render($grid) {
-		$grid->addColumnText('inheritBy', _('Inherit by'), 'inherit.name')
-                ->setSortable()
-				->setFilterText();
+		$grid->addColumnText('resource', _('Resource'));
                 
 		return $grid;
 	}

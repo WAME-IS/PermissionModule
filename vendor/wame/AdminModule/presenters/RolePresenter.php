@@ -6,9 +6,13 @@ use Wame\DynamicObject\Vendor\Wame\AdminModule\Presenters\AdminFormPresenter;
 use Wame\PermissionModule\Entities\RoleEntity;
 use Wame\PermissionModule\Repositories\RoleRepository;
 use Wame\PermissionModule\Models\PermissionObject;
+use Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\PermissionGrid;
 
 class RolePresenter extends AdminFormPresenter
 {
+    /** @var PermissionGrid @inject */
+    public $permissionGrid;
+    
 	/** @var RoleRepository @inject */
 	public $repository;
 
@@ -98,4 +102,40 @@ class RolePresenter extends AdminFormPresenter
         return 'Admin.RoleGrid';
     }
 
+    
+    /**
+     * Create permission grid
+     *
+     * @return DataGridControl
+     */
+    protected function createComponentPermissionGrid()
+    {
+        if (!$this->repository && $this->getGridServiceAlias()) {
+            throw new \Exception("Repository or grid service alias not initialized in presenter");
+        }
+
+        $grid = $this->permissionGrid; //$this->context->getService($this->getGridServiceAlias());
+        
+//        $this->permissionObject;
+        
+        $source = [];
+        
+        $i = 0;
+        
+        foreach($this->permissionObject->getAllResourceActions() as $resource => $actions) {
+            foreach($actions as $action) {
+                $source[] = [
+                    'id' => ++$i,
+                    'resource' => $resource,
+                    'action' => $action,
+                    'permission' => $this->permissionObject->isAllowed($this->entity->name, $resource, $action)
+                ];
+            }
+        }
+        
+		$grid->setDataSource($source);
+
+        return $grid;
+    }
+    
 }

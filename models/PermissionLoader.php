@@ -22,15 +22,15 @@ class PermissionLoader extends Object
 
 	public function setupPermissions() 
 	{
-		$permissions = $this->permissionRepository->find(['status' => PermissionRepository::STATUS_ENABLED]);
-
+		$permissions = $this->permissionRepository->find();
+        
 		foreach ($permissions as $permission) {
 			if ($permission->tag == PermissionRepository::TAG_ALLOW) {
-				$this->permission->allow($permission->role, $permission->resource, $permission->action);
+				$this->permission->allow($permission->role->getName(), $permission->resource, $permission->action);
 			} elseif ($permission->tag == PermissionRepository::TAG_OWN) {
-				$this->permission->allow($permission->role, $permission->resource, $permission->action . PermissionObject::ACESS_OWN_CHAR);
+				$this->permission->allow($permission->role->getName(), $permission->resource, $permission->action . PermissionObject::ACESS_OWN_CHAR);
 			} elseif ($permission->tag == PermissionRepository::TAG_DENY) {
-				$this->permission->deny($permission->role, $permission->resource, $permission->action);
+				$this->permission->deny($permission->role->getName(), $permission->resource, $permission->action);
 			}
 		}
 	}

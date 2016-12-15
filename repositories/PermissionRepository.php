@@ -32,5 +32,31 @@ class PermissionRepository extends BaseRepository
 		
 		return $return;
 	}
+    
+    
+    /**
+     * Create permission
+     * 
+     * @param PermissionEntity $permissionEntity    permission
+     * @return PermissionEntity
+     */
+    public function create($permissionEntity)
+    {
+        $this->entityManager->persist($permissionEntity);
+        $this->entityManager->flush();
+        
+        return $permissionEntity;
+    }
+    
+    /**
+     * Update permission
+     * 
+     * @param PermissionEntity $permissionEntity    permission
+     * @return PermissionEntity
+     */
+    public function update($permissionEntity)
+    {
+        return $permissionEntity;
+    }
 	
 }

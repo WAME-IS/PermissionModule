@@ -1,22 +1,2 @@
 {block content}
-    <div class="card-panel white no-margin">
-        <table class="striped">
-            <thead>
-                <tr>
-                    <th>Resource</th>
-                    <th>Action</th>
-                    <th>Allowed</th>
-                </tr>
-            </thead>
-            <tbody>
-                {foreach $permissionObject->getAllResourceActions() as $resource => $actions}
-                    <tr n:foreach="$actions as $action">
-                        <td>{$resource}</td>
-                        <td>{$action}</td>
-                        {var $allowed = $permissionObject->isAllowed($entity->name, $resource, $action)}
-                        <td n:class="$allowed ? 'text-success' : 'text-danger'">{$allowed ? 'TRUE' : 'FALSE'}</td>
-                    </tr>
-                {/foreach}
-            </tbody>
-        </table>
-    </div>
+    {control permissionGrid}
