@@ -51,3 +51,5 @@ services:
             - add(Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\Columns\Resource(), null, {priority: 90})
             - add(Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\Columns\Action(), null, {priority: 80})
             - add(Wame\PermissionModule\Vendor\Wame\AdminModule\Grids\Columns\Permission(), null, {priority: 70})
+#            - add(Wame\DataGridControl\Columns\EditUser(), null, {priority: 60})
+#            - add(Wame\DataGridControl\Columns\EditDate(), null, {priority: 50})

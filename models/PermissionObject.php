@@ -6,6 +6,7 @@ use Exception;
 use Nette\Security\Permission;
 use Nette\Utils\Strings;
 use Tracy\Debugger;
+use Wame\PermissionModule\Models\RoleLoader;
 
 class PermissionObject extends Permission 
 {
@@ -16,16 +17,19 @@ class PermissionObject extends Permission
 	private $resourceActions = [];
 
     
-	public function __construct() 
+	public function __construct(RoleLoader $roleLoader) 
 	{
-		/*
-		 * ! WARNING !
-		 * Nemaju byt role nacitane dynamicky?
-		 */
-		$this->addRole('guest');
-		$this->addRole('client', ['guest']);
-		$this->addRole('moderator', ['client']);
-		$this->addRole('admin', ['moderator']);
+        // setup role loader
+        $roleLoader->setup($this);
+        
+//		/*
+//		 * ! WARNING !
+//		 * Nemaju byt role nacitane dynamicky?
+//		 */
+//		$this->addRole('guest');
+//		$this->addRole('client', ['guest']);
+//		$this->addRole('moderator', ['client']);
+//		$this->addRole('admin', ['moderator']);
 	}
 
     
@@ -42,6 +46,7 @@ class PermissionObject extends Permission
 		return false;
 	}
 
+    /** {@inheritDoc} */
 	public function addResource($resource, $parent = null) 
 	{
 		parent::addResource($resource, $parent);

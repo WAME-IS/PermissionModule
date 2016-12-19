@@ -21,7 +21,9 @@ services:
     - {class: Wame\PermissionModule\Events\PresenterListener, tags: [run]}
 
 
+    # Models
     - Wame\PermissionModule\Models\PermissionLoader
+    - Wame\PermissionModule\Models\RoleLoader
 
 
     # Repositories

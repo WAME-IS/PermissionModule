@@ -18,8 +18,11 @@ class PresenterListener extends Object
     private $permissionLoader;
     
     
-	public function __construct(Application $application, PermissionObject $permissionObject, PermissionLoader $permissionLoader)
-    {
+	public function __construct(
+        Application $application, 
+        PermissionObject $permissionObject, 
+        PermissionLoader $permissionLoader
+    ) {
         $this->permissionObject = $permissionObject;
         $this->permissionLoader = $permissionLoader;
         
@@ -32,7 +35,7 @@ class PresenterListener extends Object
         if ($presenter instanceof BasePresenter) {
             $presenter->onStageChange[] = function(PresenterStageChangeEvent $event) use ($presenter) {
                 if ($event->enters('startup')) {
-                    $this->permissionLoader->setupPermissions();
+                    $this->permissionLoader->setup($this->permissionObject);
                     $this->checkPermission($presenter);
                 }
             };

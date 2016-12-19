@@ -128,7 +128,9 @@ class RolePresenter extends AdminFormPresenter
                     'id' => ++$i,
                     'resource' => $resource,
                     'action' => $action,
-                    'permission' => $this->permissionObject->isAllowed($this->entity->name, $resource, $action)
+                    'permission' => $this->permissionObject->isAllowed($this->entity->name, $resource, $action),
+//                    'editDate' => '',
+//                    'editUser.fullName' => ''
                 ];
             }
         }
