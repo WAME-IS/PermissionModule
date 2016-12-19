@@ -114,9 +114,7 @@ class RolePresenter extends AdminFormPresenter
             throw new \Exception("Repository or grid service alias not initialized in presenter");
         }
 
-        $grid = $this->permissionGrid; //$this->context->getService($this->getGridServiceAlias());
-        
-//        $this->permissionObject;
+        $grid = $this->permissionGrid;
         
         $source = [];
         
@@ -124,8 +122,9 @@ class RolePresenter extends AdminFormPresenter
         
         foreach($this->permissionObject->getAllResourceActions() as $resource => $actions) {
             foreach($actions as $action) {
-                $source[] = [
-                    'id' => ++$i,
+                ++$i;
+                $source[$i] = [
+                    'id' => $i,
                     'resource' => $resource,
                     'action' => $action,
                     'permission' => $this->permissionObject->isAllowed($this->entity->name, $resource, $action),

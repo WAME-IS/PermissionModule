@@ -9,6 +9,10 @@ use Wame\PermissionModule\Repositories\RoleRepository;
 
 class Permission extends BaseGridItem
 {
+    const TAG_ALLOWED = 'a';
+    const TAG_DENIED = 'd';
+    
+    
     /** @var PermissionRepository */
     private $permissionRepository;
     
@@ -38,12 +42,18 @@ class Permission extends BaseGridItem
                     ->setClass('btn-danger')
                     ->endOption()
                 ->onChange[] = function($id, $newValue) use ($grid) {
-                    $item = $grid->getDataModel()->getDataSource()->getData()[$id];
+                    $data = $grid->getDataModel()->getDataSource()->getData();
+                    $item = $data[$id];
                     
                     $role = $this->roleRepository->get(['id' => $grid->getPresenter()->id]);
-                    $permission = $this->permissionRepository->get(['resource' => $item['resource'], 'action' => $item['action'], 'role' => $role]);
                     
-                    $tag = $newValue ? 'a' : 'd';
+                    $permission = $this->permissionRepository->get([
+                        'resource' => $item['resource'], 
+                        'action' => $item['action'], 
+                        'role' => $role
+                    ]);
+                    
+                    $tag = $newValue ? self::TAG_ALLOWED : self::TAG_DENIED;
                     
                     if($permission) {
                         $permission->setTag($tag);
