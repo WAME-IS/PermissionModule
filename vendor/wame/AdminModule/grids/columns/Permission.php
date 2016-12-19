@@ -43,7 +43,7 @@ class Permission extends BaseGridItem
                     ->endOption()
                 ->onChange[] = function($id, $newValue) use ($grid) {
                     $data = $grid->getDataModel()->getDataSource()->getData();
-                    $item = $data[$id];
+                    $item = &$data[$id];
                     
                     $role = $this->roleRepository->get(['id' => $grid->getPresenter()->id]);
                     
@@ -69,6 +69,10 @@ class Permission extends BaseGridItem
                         
                         $this->permissionRepository->create($permission);
                     }
+                    
+                    $item['permission'] = $newValue;
+                    $grid->setDataSource($data);
+                    $grid->redrawItem($id);
                 };
                 
 		return $grid;
