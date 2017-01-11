@@ -3,15 +3,17 @@
 namespace Wame\PermissionModule\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
+use Wame\Core\Entities\BaseEntity;
 use Wame\Core\Entities\Columns;
 
 /**
  * @ORM\Table(name="wame_role")
  * @ORM\Entity
  */
-class RoleEntity extends \Wame\Core\Entities\BaseEntity 
+class RoleEntity extends BaseEntity
 {
 	use Columns\Status;
+
 
 	/**
      * @ORM\Column(name="id", type="integer", length=2, nullable=false)
@@ -30,5 +32,52 @@ class RoleEntity extends \Wame\Core\Entities\BaseEntity
 	 * @ORM\JoinColumn(name="inherit_id", referencedColumnName="id", nullable=true)
 	 */
     protected $inherit;
+
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name name
+     * @return $this
+     */
+    public function setName(string $name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get inherit
+     *
+     * @return RoleEntity
+     */
+    public function getInherit()
+    {
+        return $this->inherit;
+    }
+
+    /**
+     * Set inherit
+     *
+     * @param RoleEntity $inherit inherit
+     * @return $this
+     */
+    public function setInherit(RoleEntity $inherit)
+    {
+        $this->inherit = $inherit;
+
+        return $this;
+    }
 
 }
