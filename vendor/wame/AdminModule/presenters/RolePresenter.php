@@ -2,6 +2,7 @@
 
 namespace App\AdminModule\Presenters;
 
+use Wame\DataGridControl\DataGridControl;
 use Wame\DynamicObject\Vendor\Wame\AdminModule\Presenters\AdminFormPresenter;
 use Wame\PermissionModule\Entities\RoleEntity;
 use Wame\PermissionModule\Repositories\RoleRepository;
@@ -102,11 +103,14 @@ class RolePresenter extends AdminFormPresenter
         return 'Admin.RoleGrid';
     }
 
-    
+
+    /** components ************************************************************/
+
     /**
-     * Create permission grid
+     * Permission grid component
      *
      * @return DataGridControl
+     * @throws \Exception
      */
     protected function createComponentPermissionGrid()
     {
