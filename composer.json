@@ -12,6 +12,10 @@
     "require": {
         "wame/UserModule": "*"
     },
+    "softRequire": {
+        "wame/AdminModule": "*",
+        "wame/MenuModule": "*"
+    },
     "autoload": {
         "classmap": [
             "."
