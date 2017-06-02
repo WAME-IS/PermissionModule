@@ -3,18 +3,24 @@
     "version": "0.0.1",
     "description": "CMS WAME admin",
     "homepage": "http://wame.sk/cms-wame-admin",
+    "minimum-stability": "dev",
     "authors": [
         {
-            "name": "Wame",
+            "name": "WAME s.r.o.",
             "homepage": "http://wame.sk"
         }
     ],
+    "repositories": [
+        { "type": "composer", "url": "http://packages.wame.sk" },
+        { "type": "vcs", "url": "https://github.com/wamesro/forms" }
+    ],
+    "config": { "secure-http": false },
     "require": {
-        "wame/UserModule": "*"
+        "wame/UserModule": "0.0.*"
     },
     "softRequire": {
-        "wame/AdminModule": "*",
-        "wame/MenuModule": "*"
+        "wame/AdminModule": "0.0.*",
+        "wame/MenuModule": "0.0.*"
     },
     "autoload": {
         "classmap": [
