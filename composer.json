@@ -16,11 +16,11 @@
     ],
     "config": { "secure-http": false },
     "require": {
-        "wame/UserModule": "0.0.*"
+        "wame/UserModule": ">=0.0.1"
     },
     "softRequire": {
-        "wame/AdminModule": "0.0.*",
-        "wame/MenuModule": "0.0.*"
+        "wame/AdminModule": ">=0.0.1",
+        "wame/MenuModule": ">=0.0.1"
     },
     "autoload": {
         "classmap": [
