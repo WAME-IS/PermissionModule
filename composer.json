@@ -11,8 +11,7 @@
         }
     ],
     "repositories": [
-        { "type": "composer", "url": "http://packages.wame.sk" },
-        { "type": "vcs", "url": "https://github.com/wamesro/forms" }
+        { "type": "composer", "url": "http://packages.wame.sk" }
     ],
     "config": { "secure-http": false },
     "require": {
