@@ -32,19 +32,27 @@ class RoleLoader
         try {
             $roles = $this->entityManager->getRepository(RoleEntity::class)->findBy([]);
 
-            foreach ($roles as $role) {
-                $roleName = $role->getName();
-                $inheritBy = $role->getInherit() ? [$role->getInherit()->getName()] : null;
-                $permission->addRole($roleName, $inheritBy);
+            if (count($roles)) {
+                foreach ($roles as $role) {
+                    $roleName = $role->getName();
+                    $inheritBy = $role->getInherit() ? [$role->getInherit()->getName()] : null;
+                    $permission->addRole($roleName, $inheritBy);
+                }
+            } else {
+                $this->defaultRoles($permission);
             }
         } catch (\Exception $e) {
-            $permission->addRole('guest');
-            $permission->addRole('client', ['guest']);
-            $permission->addRole('moderator', ['client']);
-            $permission->addRole('admin', ['guest']);
-
-//            throw new \Exception($e);
+            $this->defaultRoles($permission);
         }
+    }
+
+
+    private function defaultRoles($permission)
+    {
+        $permission->addRole('guest');
+        $permission->addRole('client', ['guest']);
+        $permission->addRole('moderator', ['client']);
+        $permission->addRole('admin', ['guest']);
     }
 
 }
